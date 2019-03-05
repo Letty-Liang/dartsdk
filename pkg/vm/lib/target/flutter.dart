@@ -39,6 +39,7 @@ class FlutterTarget extends VmTarget {
 
         // Required for flutter.
         'dart:ui',
+        'dart:jsc',
         'dart:vmservice_io',
       ];
 }

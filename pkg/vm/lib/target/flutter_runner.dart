@@ -43,5 +43,7 @@ class FlutterRunnerTarget extends VmTarget {
         'dart:fuchsia',
         'dart:vmservice_io',
         'dart:ui',
+        // modified for jsc
+        'dart:jsc',
       ];
 }
