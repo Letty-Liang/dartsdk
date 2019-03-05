@@ -288,6 +288,14 @@ String _updateLibraryMetadata(String sdkOut, String libContents) {
           documented: false,
           platforms: VM_PLATFORM),
   ''');
+    extraLibraries.write('''
+      "jsc": const LibraryInfo(
+          "jsc/jsc.dart",
+          categories: "Client,Server",
+          implementation: true,
+          documented: false,
+          platforms: VM_PLATFORM),
+  ''');
   }
 
   if (forRunner) {
@@ -367,6 +375,15 @@ _copyExtraLibraries(String sdkOut, Map<String, Map<String, String>> locations) {
       _writeSync(uiLibraryOut, readInputFile(file.path));
     }
     addLocation(locations, 'ui', path.join('ui', 'ui.dart'));
+
+    var jscLibraryInDir = new Directory(path.join(flutterDir.path, 'lib', 'jsc'));
+    for (var file in jscLibraryInDir.listSync()) {
+      if (!file.path.endsWith('.dart')) continue;
+      var name = path.basename(file.path);
+      var jscLibraryInDir = path.join(sdkOut, 'jsc', name);
+      _writeSync(jscLibraryInDir, readInputFile(file.path));
+    }
+    addLocation(locations, 'jsc', path.join('jsc', 'jsc.dart'));
   }
 
   if (forRunner) {
